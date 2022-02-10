@@ -17,13 +17,14 @@
 
   // Création de la class Kanap, qui permettra de créer les objets
   class Kanap{
-    constructor(id,name,price,description,colors,altTxt){
+    constructor(id,name,price,description,colors,altTxt,imageUrl){
       this.id = id;
       this.name = name;
       this.price = price ;
       this.description = description;
       this.colors = colors;
       this.altTxt = altTxt;
+      this.imageUrl = imageUrl;
     }
   }
 
@@ -33,33 +34,46 @@
   function createObjects(canapes) {
 
     // Affichage des données récupérées depuis l'API
-    console.log(canapes);
+    //console.log(canapes);
 
     // Création d'une boucle, pour créer un nouvel objet pour chacun des canapé trouvés dans la variables canapes
-    for(Kanap of canapes) {
-      arrayCanapes.push(new Kanap(canape._id, canape.imageUrl, canape.name, canape.price, canape.description, canape.colors, canape.altTxt));
+    for(objet of canapes) {
+      arrayCanapes.push(new Kanap(objet._id, objet.name, objet.price, objet.description, objet.colors, objet.altTxt, objet.imageUrl));
     }
 
     // Affichage du tableau rempli avec les objets créés
-    console.log(arrayCanapes);
+    //console.log(arrayCanapes);
 
     displayCanapes(arrayCanapes);
+    // Afficher //
 
   }
 
   function displayCanapes(arrayCanapes) {
       alert('coucou');
+
+      console.log(arrayCanapes);
+      //boucle pour recherche produit dans tableau
+      for (canapes of arrayCanapes){
+
+        console.log(canapes);
+        console.log(canapes.name);
+
+        document.getElementById("items").innerHTML +=
+        `<a href="./product.html?id=${canapes._id}">
+          <article>
+            <img src="${canapes.imageUrl}" alt="${canapes.altTxt}">
+            <h3 class="productName">${canapes.name}</h3>
+            <p class="productDescription">${canapes.description}</p>
+          </article>
+        </a>
+        `
+      }
+
   }
+
+
 //boucle pour recherche produit dans tableau
-for (canape of arrayCanapes){
-let items = document.getElementById("items").innerHTML +=
-`<a href="./product.html?id=${canape._id}">
- <article>
- <img src="${canape.imageUrl}" alt="${canape.altTxt}">
- <h3 class="productName">${canape.name}</h3>
- <p class="productDescription">${canape.description}</p>
-</article>
-</a>
-`
-}
+
+
 //affichage Produits//
